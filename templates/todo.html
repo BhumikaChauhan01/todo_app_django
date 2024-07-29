@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center">Your Tasks</h2>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in result %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ todo.task }}</td>
+                    <td>{{ todo.created_at }}</td>
+
+                    <td>
+                        
+                        <a href="{% url 'update_todo' todo.id %}" class="btn btn-success">update</a>
+                        <a href="{% url 'delete_todo' todo.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'mark_complete' todo.id %}" class="btn btn-warning">mark_complete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'add_todo' %}" class="btn btn-primary" style="background-color: #6a11cb; border-color: #6a11cb;">Add Todo</a>
+    </div>
+</div>
+
+<style>
+    .table {
+        background-color: rgba(255, 255, 255, 0.8); /* White background with transparency */
+    }
+    .table-hover tbody tr:hover {
+        background-color: rgba(106, 17, 203, 0.1); /* Light purple hover effect */
+    }
+    .table thead th {
+        background-color: #6a11cb; /* Purple header */
+        color: white;
+    }
+    .btn-primary {
+        background-color: #6a11cb;
+        border-color: #6a11cb;
+    }
+    .btn-primary:hover {
+        background-color: plum;
+        border-color: plum;
+    }
+</style>
+{% endblock %}
